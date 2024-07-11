@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { RssItemsService } from '../rss-items.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.css'
+  styleUrls: ['./homepage.component.css']
 })
-export class HomepageComponent {
-
+export class HomepageComponent implements OnInit {
 
   rssItems: any[] = [];
   errorMessage!: string;
-
 
   constructor(private rssItemsService: RssItemsService) { }
 
@@ -24,12 +20,12 @@ export class HomepageComponent {
     this.rssItemsService.getRssItems().subscribe({
       next: (rssItems) => {
         this.rssItems = rssItems;
-        console.log(this.rssItems);
+        console.log('RSS Items loaded:', this.rssItems);  // Debugging-Statement
       },
       error: (error) => {
         this.errorMessage = error;
+        console.error('Error loading RSS items:', error);  // Debugging-Statement
       },
     });
   }
-
 }

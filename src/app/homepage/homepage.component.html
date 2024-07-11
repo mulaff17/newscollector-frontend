@@ -1,1 +1,12 @@
-<h2>Test Home</h2>
+<div *ngIf="rssItems.length > 0; else noData">
+    <ul>
+      <li *ngFor="let item of rssItems">
+        <h3><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></h3>
+        <p>{{ item.pubDate | date:'medium' }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noData>
+    <p>No RSS items available.</p>
+  </ng-template>
+  
