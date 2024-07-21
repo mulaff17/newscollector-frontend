@@ -1,12 +1,15 @@
 <div *ngIf="rssItems.length > 0; else noData">
-    <ul>
-      <li *ngFor="let item of rssItems">
-        <h3><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></h3>
-        <p>{{ item.pubDate | date:'medium' }}</p>
-      </li>
-    </ul>
+  <div class="rss-grid">
+    <div class="rss-item" *ngFor="let item of rssItems">
+      <div class="image-container">
+        <img [src]="getImageUrl(item.guid)" alt="{{ item.title }}" class="rss-image" />
+      </div>
+      <h3><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></h3>
+      <p class="rss-creator">{{ item.creator }}</p>
+      <p class="rss-date">{{ item.pubDate | date:'medium' }}</p>
+    </div>
   </div>
-  <ng-template #noData>
-    <p>No RSS items available.</p>
-  </ng-template>
-  
+</div>
+<ng-template #noData>
+  <p>No RSS items available.</p>
+</ng-template>

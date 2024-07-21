@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RssItemsService } from '../rss-items.service';
 import { CommonModule } from '@angular/common';
+import { RssItemsService } from '../rss-items.service';
+import { RssData } from '../rss-data';
 
 @Component({
   selector: 'app-homepage',
@@ -10,22 +11,24 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
-  rssItems: any[] = [];
+  rssItems: RssData[] = [];
   errorMessage!: string;
 
   constructor(private rssItemsService: RssItemsService) { }
 
   ngOnInit() {
     this.rssItemsService.getRssItems().subscribe({
-      next: (rssItems) => {
+      next: (rssItems: RssData[]) => {
         this.rssItems = rssItems;
-        console.log('RSS Items loaded:', this.rssItems);  // Debugging-Statement
       },
       error: (error) => {
-        this.errorMessage = error;
-        console.error('Error loading RSS items:', error);  // Debugging-Statement
+        this.errorMessage = 'Error loading RSS items';
+        console.error('Error loading RSS items:', error);
       },
     });
+  }
+
+  getImageUrl(guid: string): string {
+    return `http://localhost:3000/api/image/${guid}`;
   }
 }
