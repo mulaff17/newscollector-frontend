@@ -1,4 +1,5 @@
 export interface RssData {
+    id: number;
     title: string;
     link: string;
     pubDate: string;

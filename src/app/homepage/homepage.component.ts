@@ -11,7 +11,8 @@ import { RssData } from '../rss-data';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  rssItems: RssData[] = [];
+
+  rssItems: (RssData & { newsSiteName?: string })[] = [];
   errorMessage!: string;
 
   constructor(private rssItemsService: RssItemsService) { }
@@ -20,15 +21,29 @@ export class HomepageComponent implements OnInit {
     this.rssItemsService.getRssItems().subscribe({
       next: (rssItems: RssData[]) => {
         this.rssItems = rssItems;
+        this.loadNewsSiteNames();
       },
       error: (error) => {
-        this.errorMessage = 'Error loading RSS items';
+        this.errorMessage = error;
         console.error('Error loading RSS items:', error);
       },
     });
   }
 
-  getImageUrl(guid: string): string {
-    return `http://localhost:3000/api/image/${guid}`;
+  getImageUrl(id: number): string {
+    return this.rssItemsService.getImageUrl(id);
+  }
+
+  loadNewsSiteNames() {
+    this.rssItems.forEach((item, index) => {
+      this.rssItemsService.getNewsSiteName(item.news_site_id).subscribe({
+        next: (response) => {
+          this.rssItems[index].newsSiteName = response.length > 0 ? response[0].name : 'Unknown';
+        },
+        error: (error) => {
+          console.error('Error loading news site name:', error);
+        },
+      });
+    });
   }
 }

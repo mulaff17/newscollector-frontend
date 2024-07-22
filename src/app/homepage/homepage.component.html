@@ -2,11 +2,12 @@
   <div class="rss-grid">
     <div class="rss-item" *ngFor="let item of rssItems">
       <div class="image-container">
-        <img [src]="getImageUrl(item.guid)" alt="{{ item.title }}" class="rss-image" />
+        <img [src]="getImageUrl(item.id)" alt="{{ item.title }}" class="rss-image"/>
       </div>
       <h3><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></h3>
       <p class="rss-creator">{{ item.creator }}</p>
       <p class="rss-date">{{ item.pubDate | date:'medium' }}</p>
+      <p class="rss-news-site">{{ item.newsSiteName }}</p> 
     </div>
   </div>
 </div>
