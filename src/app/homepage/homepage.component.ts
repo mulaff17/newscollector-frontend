@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RssItemsService } from '../rss-items.service';
 import { RssData } from '../rss-data';
 
+
 @Component({
   selector: 'app-homepage',
   standalone: true,
@@ -20,8 +21,8 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.rssItemsService.getRssItems().subscribe({
       next: (rssItems: RssData[]) => {
-        this.rssItems = rssItems;
-        this.loadNewsSiteNames();
+        this.rssItems = rssItems.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+        this.loadNewsSiteNames(); 
       },
       error: (error) => {
         this.errorMessage = error;
