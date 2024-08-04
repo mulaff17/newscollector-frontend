@@ -1,40 +1,90 @@
+/* Container to center the grid */
+.rss-grid-container {
+  display: flex;
+  justify-content: center;
+  padding: 0 16px; /* Add padding to the left and right */
+}
+
+/* Grid configuration */
 .rss-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
-  }
-  
-  .rss-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    padding: 16px;
-    background-color: #fff;
-  }
-  
-  .image-container {
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .rss-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  h3 a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .rss-creator {
-    font-size: 0.9rem;
-    color: #777;
-  }
-  
-  .rss-date {
-    font-size: 0.8rem;
-    color: #aaa;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px; /* Space between grid items */
+  max-width: 1200px; /* Set a max-width for the grid */
+  width: 100%; /* Ensure the grid takes full width within the container */
+  margin: 0 auto; /* Center the grid container */
+}
+
+/* Styling for individual grid items */
+.rss-item {
+  border: 1px solid #ddd;
+  border-radius: 12px; /* More rounded corners */
+  overflow: hidden;
+  background-color: #f9f9f9; /* Slightly different background color for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Styling for the link */
+.rss-item-link {
+  display: block;
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit text color from parent */
+  height: 100%; /* Ensure the link fills the entire .rss-item */
+  width: 100%; /* Ensure the link fills the entire .rss-item */
+  padding: 16px; /* Ensure padding is applied */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.rss-item-link:hover {
+  transform: translateY(-4px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+
+/* Image container styling */
+.image-container {
+  overflow: hidden;
+  border-radius: 8px; /* Match border radius with item */
+}
+
+.rss-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px; /* Match border radius with item */
+}
+
+/* Heading styling */
+h3 {
+  margin: 16px 0 8px; /* Space around heading */
+  font-size: 1.1rem; /* Slightly larger font size for titles */
+  font-weight: bold; /* Bold font for emphasis */
+}
+
+/* Link styling */
+h3 a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Creator text styling */
+.rss-creator {
+  font-size: 0.9rem;
+  color: #555; /* Darker color for better readability */
+  margin: 0;
+}
+
+/* News site text styling */
+.rss-news-site {
+  font-size: 0.9rem;
+  color: #888; /* Lighter color for less emphasis */
+  margin: 4px 0; /* Space between news site and creator/date */
+}
+
+/* Date text styling */
+.rss-date {
+  font-size: 0.8rem;
+  color: #aaa; /* Light color for date */
+  margin: 0;
+}
+ 

@@ -2,7 +2,7 @@ export interface RssData {
     id: number;
     title: string;
     link: string;
-    pubDate: string;
+    pub_date: string;
     creator: string;
     guid: string;
     image?: Buffer;

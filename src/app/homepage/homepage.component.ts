@@ -21,7 +21,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.rssItemsService.getRssItems().subscribe({
       next: (rssItems: RssData[]) => {
-        this.rssItems = rssItems.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+        this.rssItems = rssItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 
       },
       error: (error) => {
