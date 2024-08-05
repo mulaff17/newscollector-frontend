@@ -16,6 +16,10 @@ export class RssItemsService {
     return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items`);
   }
 
+  getFraudRssItems(): Observable<RssData[]> {
+    return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-fraud`);
+  }
+
   getImageUrl(id: number): string {
     return `http://localhost:3000/api/image/${id}`;
   }

@@ -14,6 +14,7 @@ import { RssData } from '../rss-data';
 export class HomepageComponent implements OnInit {
 
   rssItems: (RssData & { newsSiteName?: string })[] = [];
+  rssFraudItems: (RssData & { newsSiteName?: string })[] = [];
   errorMessage!: string;
 
   constructor(private rssItemsService: RssItemsService) { }
@@ -29,6 +30,18 @@ export class HomepageComponent implements OnInit {
         console.error('Error loading RSS items:', error);
       },
     });
+
+    this.rssItemsService.getFraudRssItems().subscribe({
+      next: (rssFraudItems: RssData[]) => {
+        this.rssFraudItems = rssFraudItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
+        this.loadNewsSiteNames(); 
+      },
+      error: (error) => {
+        this.errorMessage = error;
+        console.error('Error loading RSS items:', error);
+      },
+    });
+
   }
 
   getImageUrl(id: number): string {
