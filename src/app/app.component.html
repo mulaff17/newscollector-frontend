@@ -1,2 +1,39 @@
-<h2>Homepage</h2>
-<router-outlet></router-outlet>
+<!-- app.component.html -->
+<header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">
+          <h1><a routerLink="/">MyWebsite</a></h1>
+        </div>
+        <nav class="site-nav">
+          <ul class="nav-list">
+            <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+            <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
+            <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+          </ul>
+          <button class="nav-toggle" aria-label="Toggle Navigation">
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2024 My Website. All rights reserved.</p>
+      <ul class="footer-nav">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </footer>
+  

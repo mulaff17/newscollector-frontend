@@ -1,8 +1,8 @@
-<div *ngIf="rssItems.length > 0; else noData">
-  <div class="rss-grid-container">
+<div class="container">
+  <div *ngIf="rssItems.length > 0; else noData" class="rss-grid-container">
     <h1>News</h1>
     <div class="rss-grid">
-      <div class="rss-item" *ngFor="let item of rssItems">
+      <div class="rss-item" *ngFor="let item of rssItems | slice:0:15">
         <a [href]="item.link" target="_blank" class="rss-item-link">
           <div class="image-container">
             <img [src]="getImageUrl(item.id)" alt="{{ item.title }}" class="rss-image"/>
@@ -14,27 +14,23 @@
         </a>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="rssFraudItems.length > 0; else noData" class="rss-fraud-container">
+    <h1>Fraud News</h1>
+    <ul class="rss-fraud-list">
+      <li class="rss-fraud-item" *ngFor="let item of rssFraudItems | slice:0:10">
+        <a [href]="item.link" target="_blank" class="rss-fraud-link">
+          <h3>{{ item.title }}</h3>
+          <p class="rss-creator">{{ item.creator }}</p>
+          <p class="rss-news-site">{{ item.newsSiteName }}</p>
+          <p class="rss-date">{{ item.pub_date | date:'d MMMM yyyy' }}</p>
+        </a>
+      </li>
+    </ul>
   </div>
 </div>
 
-<div *ngIf="rssFraudItems.length > 0; else noData">
-  <div class="rss-grid-container">
-    <h1>Fraud News</h1>
-    <div class="rss-grid">
-      <div class="rss-item" *ngFor="let item of rssFraudItems">
-        <a [href]="item.link" target="_blank" class="rss-item-link">
-          <div class="image-container">
-            <img [src]="getImageUrl(item.id)" alt="{{ item.title }}" class="rss-image"/>
-          </div>
-          <h3>{{ item.title }}</h3>
-          <p class="rss-creator">{{ item.creator }}</p>
-          <p class="rss-news-site">{{ item.newsSiteName }}</p>
-          <p class="rss-date">{{ item.pub_date | date:'d MMMM yyyy' }}</p>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 <ng-template #noData>
   <p>No RSS items available.</p>
 </ng-template>
