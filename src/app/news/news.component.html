@@ -1,1 +1,10 @@
-<p>news works!</p>
+<h1>News</h1>
+
+
+<form [formGroup]="filterForm" (ngSubmit)="submitForm()">
+<label>Date From</label>
+    <input type="date" formControlName="dateFrom">
+<label>Date To</label>
+    <input type="date" formControlName="dateTo">
+<button type="submit">Filtern</button>
+</form>

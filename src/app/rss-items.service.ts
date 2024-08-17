@@ -12,8 +12,12 @@ export class RssItemsService {
 
   constructor(private http: HttpClient) { }
 
-  getRssItems(): Observable<RssData[]> {
-    return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items`);
+  getRssItemsDate(dateFrom: Date, dateTo: Date): Observable<RssData[]> {
+    return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items/${dateFrom}-${dateTo}`);
+  }
+
+  getCurrentRssItems(): Observable<RssData[]> {
+    return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items-current`);
   }
 
   getFraudRssItems(): Observable<RssData[]> {
