@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RssItemsService } from '../rss-items.service';
 import { RssData } from '../rss-data';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })
@@ -25,7 +26,6 @@ export class NewsComponent {
   }
 
   submitForm() {
-    console.log(this.filterForm.value)
 
     this.rssItemsService.getRssItemsDate(this.filterForm.value.dateFrom, this.filterForm.value.dateTo).subscribe({
       next: (rssItems: RssData[]) => {
@@ -40,6 +40,9 @@ export class NewsComponent {
 
   }
 
+  getImageUrl(id: number): string {
+    return this.rssItemsService.getImageUrl(id);
+  }
 
   loadNewsSiteNames() {
     this.rssItems.forEach((item, index) => {

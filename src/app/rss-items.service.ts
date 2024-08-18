@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RssData } from './rss-data';
 
@@ -12,9 +12,15 @@ export class RssItemsService {
 
   constructor(private http: HttpClient) { }
 
-  getRssItemsDate(dateFrom: Date, dateTo: Date): Observable<RssData[]> {
-    return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items/${dateFrom}-${dateTo}`);
+  getRssItemsDate(dateFrom: string, dateTo: string): Observable<RssData[]> {
+    const params = new HttpParams()
+      .set('dateFrom', dateFrom)
+      .set('dateTo', dateTo);
+    
+    return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items/filter`, { params });
   }
+  
+  
 
   getCurrentRssItems(): Observable<RssData[]> {
     return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items-current`);
