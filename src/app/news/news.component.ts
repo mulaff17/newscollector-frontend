@@ -17,17 +17,29 @@ export class NewsComponent {
 
   errorMessage!: string;
 
+  newsSites = [
+    { id: 2, name:"Wired"},
+    { id: 3, name:"The Hacker News"},
+    { id: 4, name:"BleepingComputer"},
+    { id: 5, name:"The Verge"},
+    { id: 6, name:"Inside IT"},
+    { id: 7, name:"CSO Deutschland"},
+    { id: 8, name:"KrebsonSecurity"},
+    { id: 9, name:"DARK Reading"}
+  ]
 
   constructor(private formBuilder: FormBuilder, private rssItemsService: RssItemsService){
     this.filterForm = this.formBuilder.group({
       dateFrom: [''],
-      dateTo: ['']
+      dateTo: [''],
+      newsSites: [[]] 
     })
+
   }
 
   submitForm() {
-
-    this.rssItemsService.getRssItemsDate(this.filterForm.value.dateFrom, this.filterForm.value.dateTo).subscribe({
+    const { dateFrom, dateTo, newsSites } = this.filterForm.value;
+    this.rssItemsService.getRssItemsDate(dateFrom, dateTo, newsSites).subscribe({
       next: (rssItems: RssData[]) => {
         this.rssItems = rssItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 
