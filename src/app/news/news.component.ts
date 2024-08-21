@@ -1,21 +1,67 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RssItemsService } from '../rss-items.service';
 import { RssData } from '../rss-data';
 import { CommonModule } from '@angular/common';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
+interface DropdownItem {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgMultiSelectDropDownModule, FormsModule],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })
-export class NewsComponent {  
+export class NewsComponent implements OnInit {  
   filterForm!: FormGroup;
   rssItems: (RssData & { newsSiteName?: string })[] = [];
 
   errorMessage!: string;
+  
+
+  dropdownList: DropdownItem[] = []; 
+  selectedItems: DropdownItem[] = [];
+  dropdownSettings: IDropdownSettings = {};
+
+  ngOnInit() {
+    this.dropdownList = [
+      { id: 2, name:"Wired"},
+      { id: 3, name:"The Hacker News"},
+      { id: 4, name:"BleepingComputer"},
+      { id: 5, name:"The Verge"},
+      { id: 6, name:"Inside IT"},
+      { id: 7, name:"CSO Deutschland"},
+      { id: 8, name:"KrebsonSecurity"},
+      { id: 9, name:"DARK Reading"}
+    ];
+    this.selectedItems = [
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
+
+
+
 
   newsSites = [
     { id: 2, name:"Wired"},
@@ -52,6 +98,7 @@ export class NewsComponent {
 
   }
 
+
   getImageUrl(id: number): string {
     return this.rssItemsService.getImageUrl(id);
   }
@@ -68,5 +115,7 @@ export class NewsComponent {
       });
     });
   }
+
+  
 
 }
