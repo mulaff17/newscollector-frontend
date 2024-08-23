@@ -7,7 +7,8 @@
 <label>Date To</label>
     <input type="date" formControlName="dateTo">
 <label>News Site</label>
-<select multiple multiselect-search="true" multiselect-select-all formControlName="newsSites">
+<select multiple multiselect-select-all formControlName="newsSites">
+  
   <option *ngFor="let site of newsSites" [ngValue]="site.id">
    {{ site.name }}
   </option>
@@ -40,11 +41,3 @@
     <p>No RSS items available.</p>
   </ng-template>
   
-  <ng-multiselect-dropdown
-  [settings]="dropdownSettings"
-  [data]="dropdownList"
-  [(ngModel)]="selectedItems"
-  (onSelect)="onItemSelect($event)"
-  (onSelectAll)="onSelectAll($event)"
->
-</ng-multiselect-dropdown>
