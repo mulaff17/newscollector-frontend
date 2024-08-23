@@ -2,19 +2,23 @@
 
 
 <form [formGroup]="filterForm" (ngSubmit)="submitForm()">
-<label>Date From</label>
-    <input type="date" formControlName="dateFrom">
-<label>Date To</label>
-    <input type="date" formControlName="dateTo">
-<label>News Site</label>
-<select multiple multiselect-select-all formControlName="newsSites">
-  
-  <option *ngFor="let site of newsSites" [ngValue]="site.id">
-   {{ site.name }}
-  </option>
-</select> 
+
+  <mat-form-field>
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date" formControlName="dateFrom">
+      <input matEndDate placeholder="End date" formControlName="dateTo">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+
 <button type="submit">Filtern</button>
 </form>
+
+
 
 
 <div class="container">

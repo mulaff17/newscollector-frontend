@@ -25,7 +25,7 @@ export class HomepageComponent implements OnInit {
         this.rssItems = rssItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 
       },
-      error: (error) => {
+      error: (error:any) => {
         this.errorMessage = error;
         console.error('Error loading RSS items:', error);
       },
@@ -36,7 +36,7 @@ export class HomepageComponent implements OnInit {
         this.rssFraudItems = rssFraudItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 
       },
-      error: (error) => {
+      error: (error:any) => {
         this.errorMessage = error;
         console.error('Error loading RSS items:', error);
       },
@@ -51,10 +51,10 @@ export class HomepageComponent implements OnInit {
   loadNewsSiteNames() {
     this.rssItems.forEach((item, index) => {
       this.rssItemsService.getNewsSiteName(item.news_site_id).subscribe({
-        next: (response) => {
+        next: (response:any) => {
           this.rssItems[index].newsSiteName = response.length > 0 ? response[0].name : 'Unknown';
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error loading news site name:', error);
         },
       });

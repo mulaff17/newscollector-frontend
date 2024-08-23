@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RssItemsService } from '../rss-items.service';
 import { RssData } from '../rss-data';
 import { CommonModule } from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+
+
 
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule,MatFormFieldModule, MatDatepickerModule],
   templateUrl: './news.component.html',
-  styleUrl: './news.component.css',
+  providers: [provideNativeDateAdapter()],
+  styleUrl: './news.component.css'
 })
 export class NewsComponent {  
   filterForm!: FormGroup;
@@ -45,13 +51,14 @@ export class NewsComponent {
   }
 
   submitForm() {
+    console.log(this.filterForm.value);
     const { dateFrom, dateTo, newsSites } = this.filterForm.value;
     this.rssItemsService.getRssItemsDate(dateFrom, dateTo, newsSites).subscribe({
       next: (rssItems: RssData[]) => {
         this.rssItems = rssItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 
       },
-      error: (error) => {
+      error: (error:any) => {
         this.errorMessage = error;
         console.error('Error loading RSS items:', error);
       },
@@ -67,10 +74,10 @@ export class NewsComponent {
   loadNewsSiteNames() {
     this.rssItems.forEach((item, index) => {
       this.rssItemsService.getNewsSiteName(item.news_site_id).subscribe({
-        next: (response) => {
+        next: (response:any) => {
           this.rssItems[index].newsSiteName = response.length > 0 ? response[0].name : 'Unknown';
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error loading news site name:', error);
         },
       });
