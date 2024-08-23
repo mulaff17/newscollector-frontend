@@ -1,33 +1,39 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RssItemsService } from '../rss-items.service';
 import { RssData } from '../rss-data';
 import { CommonModule } from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+import { DatePipe } from '@angular/common';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 
-
+export interface NewsSite {
+  name: string,
+  id: number
+}
 
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule,MatFormFieldModule, MatDatepickerModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './news.component.html',
-  providers: [provideNativeDateAdapter()],
+  providers: [DatePipe, provideNativeDateAdapter()],
   styleUrl: './news.component.css'
 })
-export class NewsComponent {  
-  filterForm!: FormGroup;
+export class NewsComponent implements OnInit {  
   rssItems: (RssData & { newsSiteName?: string })[] = [];
-
+  filterForm!: FormGroup;
   errorMessage!: string;
-  
-
-
-
-  newsSites = [
+  formattedDateFrom!: string;
+  formattedDateTo!: string;
+  readonly dateFrom = new FormControl(new Date());
+  readonly dateTo = new FormControl(new Date());
+  readonly formNewsSites: NewsSite[] = [
     { id: 2, name:"Wired"},
     { id: 3, name:"The Hacker News"},
     { id: 4, name:"BleepingComputer"},
@@ -36,24 +42,30 @@ export class NewsComponent {
     { id: 7, name:"CSO Deutschland"},
     { id: 8, name:"KrebsonSecurity"},
     { id: 9, name:"DARK Reading"}
-  ]
+  ];
 
+  selectedNewsSites = new FormControl([]);
 
+  constructor(private rssItemsService: RssItemsService, private formBuilder: FormBuilder, private datePipe: DatePipe){
 
-
-  constructor(private formBuilder: FormBuilder, private rssItemsService: RssItemsService){
-    this.filterForm = this.formBuilder.group({
-      dateFrom: [''],
-      dateTo: [''],
-      newsSites: [[]] 
-    })
 
   }
 
-  submitForm() {
-    console.log(this.filterForm.value);
-    const { dateFrom, dateTo, newsSites } = this.filterForm.value;
-    this.rssItemsService.getRssItemsDate(dateFrom, dateTo, newsSites).subscribe({
+  
+  ngOnInit() {
+    this.filterForm = this.formBuilder.group({
+      dateFrom: new Date(),
+      dateTo: new Date(),
+      selectedNewsSites: [[]]
+    });
+  }
+
+  submit() {
+    const newsSites: number[] = this.selectedNewsSites.value || [];
+
+    this.formattedDateFrom = this.datePipe.transform(this.dateFrom.value, 'yyyy-MM-dd') || '';
+    this.formattedDateTo = this.datePipe.transform(this.dateTo.value, 'yyyy-MM-dd') || '';
+    this.rssItemsService.getRssItemsDate(this.formattedDateFrom, this.formattedDateTo, newsSites).subscribe({
       next: (rssItems: RssData[]) => {
         this.rssItems = rssItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 

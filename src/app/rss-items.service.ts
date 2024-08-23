@@ -11,15 +11,16 @@ export class RssItemsService {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
-
-  getRssItemsDate(dateFrom: string, dateTo: string, newsSites: number): Observable<RssData[]> {
+  getRssItemsDate(dateFrom: string, dateTo: string, newsSites: number[]): Observable<RssData[]> {
+    const newsSitesString = newsSites.join(','); // Convert the array to a comma-separated string
     const params = new HttpParams()
       .set('dateFrom', dateFrom)
       .set('dateTo', dateTo)
-      .set('newsSites', newsSites);
-    
+      .set('newsSites', newsSitesString); // Set the string as the value
+      
     return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items/filter`, { params });
   }
+  
   
   
 
