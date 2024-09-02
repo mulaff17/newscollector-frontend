@@ -20,6 +20,16 @@ export class RssItemsService {
       
     return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items/filter`, { params });
   }
+
+  getFraudRssItemsDate(dateFrom: string, dateTo: string, newsSites: number[]): Observable<RssData[]> {
+    const newsSitesString = newsSites.join(','); // Convert the array to a comma-separated string
+    const params = new HttpParams()
+      .set('dateFrom', dateFrom)
+      .set('dateTo', dateTo)
+      .set('newsSites', newsSitesString); // Set the string as the value
+      
+    return this.http.get<RssData[]>(`${this.apiUrl}/api/rss-items/filter-fraud`, { params });
+  }
   
   
   

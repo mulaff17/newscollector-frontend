@@ -1,1 +1,55 @@
-<p>fraud works!</p>
+<h1>Fraud News</h1>
+
+
+<form [formGroup]="filterForm" (submit)="submit()">
+<mat-form-field>
+  <mat-label>Enter a date range</mat-label>
+  <mat-date-range-input [rangePicker]="picker">
+    <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom">
+    <input matInput matEndDate placeholder="End date" [formControl]="dateTo">
+  </mat-date-range-input>
+  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+
+
+<mat-form-field required>
+  <mat-label>Fraud News Sites</mat-label>
+  <mat-select [formControl]="selectedFraudSites" multiple (selectionChange)="onSelectionChange($event)">
+    <mat-option *ngFor="let newsSite of formfraudSites" [value]="newsSite.id">
+      {{newsSite.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+<button mat-raised-button color="primary" type="submit">Filtern</button>
+
+</form>
+
+
+<div class="container">
+    <div *ngIf="rssItems.length > 0; else noData" class="rss-grid-container">
+      <h1>News</h1>
+      <div class="rss-grid">
+        <div class="rss-item" *ngFor="let item of rssItems">
+          <a [href]="item.link" target="_blank" class="rss-item-link">
+            <div class="image-container">
+              <img [src]="getImageUrl(item.id)" alt="{{ item.title }}" class="rss-image"/>
+            </div>
+            <h3>{{ item.title }}</h3>
+            <p class="rss-news-site">{{ item.newsSiteName }}</p>
+            <p class="rss-date">{{ item.pub_date | date:'d MMMM yyyy' }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  
+
+  </div>
+  
+  <ng-template #noData>
+    <p>No RSS items available.</p>
+  </ng-template>
+  

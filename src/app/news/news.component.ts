@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RssItemsService } from '../rss-items.service';
 import { RssData } from '../rss-data';
+import { NewsSite } from '../news-site';
 import { CommonModule } from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -11,10 +12,7 @@ import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 
-export interface NewsSite {
-  name: string,
-  id: number
-}
+
 
 
 @Component({
@@ -33,7 +31,9 @@ export class NewsComponent implements OnInit {
   formattedDateTo!: string;
   readonly dateFrom = new FormControl(new Date());
   readonly dateTo = new FormControl(new Date());
+  previousValue: number[] = [];
   readonly formNewsSites: NewsSite[] = [
+    { id: 1, name:"Select All"},
     { id: 2, name:"Wired"},
     { id: 3, name:"The Hacker News"},
     { id: 4, name:"BleepingComputer"},
@@ -44,7 +44,7 @@ export class NewsComponent implements OnInit {
     { id: 9, name:"DARK Reading"}
   ];
 
-  selectedNewsSites = new FormControl([]);
+  selectedNewsSites = new FormControl<number[]>([]);
 
   constructor(private rssItemsService: RssItemsService, private formBuilder: FormBuilder, private datePipe: DatePipe){
 
@@ -58,6 +58,8 @@ export class NewsComponent implements OnInit {
       dateTo: new Date(),
       selectedNewsSites: [[]]
     });
+    
+
   }
 
   submit() {
@@ -77,7 +79,14 @@ export class NewsComponent implements OnInit {
     });
 
   }
-
+  onSelectionChange(event:any){
+    if(event.value.includes(1)){
+      const allSiteIds = this.formNewsSites.map(site => site.id);
+      this.selectedNewsSites.setValue(allSiteIds, { emitEvent: false });
+      
+     }
+    
+  }
 
   getImageUrl(id: number): string {
     return this.rssItemsService.getImageUrl(id);

@@ -1,0 +1,227 @@
+/* General Container for the page */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 32px;
+    gap: 32px;
+    margin: 16px auto;
+  }
+  
+  /* Media Query for Tablet Screens and Below */
+  @media (max-width: 1024px) {
+    .container {
+      flex-direction: column; /* Stack elements vertically */
+      padding: 0 16px; /* Reduce padding on smaller screens */
+    }
+  }
+  
+  /* Media Query for Mobile Screens */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      padding: 0 16px;
+    }
+    
+    .rss-grid {
+      grid-template-columns: repeat(3, 1fr) !important; /* 3 columns for mobile screens */
+    }
+  
+    .rss-fraud-container {
+      margin-top: 24px; /* Add margin between sections */
+    }
+  
+    h3 {
+      font-size: 1rem; /* Reduce font size for titles */
+    }
+  
+    .rss-creator, .rss-news-site, .rss-date {
+      font-size: 0.8rem; /* Reduce text size for creator, site, and date */
+    }
+  
+    .rss-item-link {
+      padding: 12px; /* Reduce padding inside RSS items */
+    }
+  
+    .rss-fraud-item h3 {
+      font-size: 0.9rem; /* Reduce font size for fraud news titles */
+    }
+  }
+  
+  /* Media Query for Small Mobile Screens */
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 8px;
+    }
+  
+    .rss-grid {
+      grid-template-columns: repeat(2, 1fr) !important; /* 2 columns for small mobile screens */
+    }
+  
+    .rss-fraud-container {
+      margin-top: 16px; /* Space above fraud news section */
+    }
+  
+    .rss-fraud-list {
+      margin: 0; /* Remove margin from list */
+      padding: 0; /* Remove padding from list */
+    }
+  
+    .rss-fraud-item {
+      padding: 12px 0; /* Reduce padding for fraud items */
+    }
+  
+    h3 {
+      font-size: 0.9rem; /* Further reduce font size */
+    }
+  
+    .rss-creator, .rss-news-site, .rss-date {
+      font-size: 0.75rem; /* Smaller text for creator, site, and date */
+    }
+  
+    .rss-item-link {
+      padding: 8px; /* Even less padding inside RSS items */
+    }
+  
+    .rss-fraud-item h3 {
+      font-size: 0.85rem; /* Further reduce font size for fraud news titles */
+    }
+  
+    .rss-image {
+      height: auto; /* Adjust image height to auto for small screens */
+      max-height: 200px; /* Limit image height to avoid overflow */
+      object-fit: cover; /* Ensure images cover the container */
+    }
+  }
+  
+  /* Grid container on the left */
+  .rss-grid-container {
+    flex: 2;
+  }
+  
+  /* Grid configuration for rssItems */
+  .rss-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Default: 5 items per row for desktop */
+    gap: 24px; /* Space between grid items */
+  }
+  
+  /* Styling for individual grid items */
+  .rss-item {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Styling for the link */
+  .rss-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  .rss-item-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Image container styling */
+  .image-container {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .rss-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  /* Heading styling */
+  h3 {
+    margin: 16px 0 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  /* Creator text styling */
+  .rss-creator {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+  }
+  
+  /* News site text styling */
+  .rss-news-site {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 4px 0;
+  }
+  
+  /* Date text styling */
+  .rss-date {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin: 0;
+  }
+  
+  /* Fraud items container on the right */
+  .rss-fraud-container {
+    flex: 1;
+  }
+  
+  /* List styling for fraud items */
+  .rss-fraud-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .rss-fraud-item {
+    border-bottom: 1px solid #ddd;
+    padding: 16px 0;
+  }
+  
+  .rss-fraud-item:last-child {
+    border-bottom: none;
+  }
+  
+  .rss-fraud-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .rss-fraud-link:hover h3 {
+    color: #007bff; /* Change title color on hover */
+  }
+  
+  /* Smaller and more condensed styling for fraud item titles */
+  .rss-fraud-item h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  /* Styling for news site in fraud items */
+  .rss-fraud-item .rss-news-site {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 4px 0;
+  }
+  
+  /* Date text styling for fraud items */
+  .rss-fraud-item .rss-date {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin: 0;
+  }
+  
