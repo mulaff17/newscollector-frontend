@@ -8,7 +8,7 @@ import { RssData } from './rss-data';
 })
 export class RssItemsService {
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://109.205.181.104:3000';
 
   constructor(private http: HttpClient) { }
   getRssItemsDate(dateFrom: string, dateTo: string, newsSites: number[]): Observable<RssData[]> {
@@ -43,7 +43,7 @@ export class RssItemsService {
   }
 
   getImageUrl(id: number): string {
-    return `http://localhost:3000/api/image/${id}`;
+    return `${this.apiUrl}/api/image/${id}`;
   }
 
   getNewsSiteName(id: number): Observable<{ name: string }[]> {
