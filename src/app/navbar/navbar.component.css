@@ -1,28 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  
+}
+
+/* Media Query for Tablet Screens and Below */
+@media (max-width: 1024px) {
+
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+
+}
+
+/* Media Query for Small Mobile Screens */
+@media (max-width: 480px) {
+
+}
+
 .toolbar {
-    background-color: #333; /* Dark background color */
-    padding: 0 20px; /* Adds padding to the left and right */
-    display: flex;
-    align-items: center;
-  }
+  background-color: #333;
   
-  .mat-toolbar {
-    min-height: 60px; /* Increase the height of the toolbar */
-    font-size: 16px; /* Increase font size */
-  }
-  
-  .mat-toolbar span {
-    color: white; /* Ensure toolbar text color is white */
-  }
-  
-  .mat-button {
-    color: white; /* Ensure button text color is white */
-  }
-  
-  .spacer {
-    flex: 1 1 auto;
-  }
-  
-  a.active {
-    text-decoration: underline; /* Optional: style for active link */
-  }
-  
+  width: 100%; /* Full width background */
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Title on the left, links on the right */
+  margin-left: 12%;
+  margin-right: 12%;
+  width: 100%;
+}
+
+
+.toolbar-content a {
+  color: white;
+}
+
+
+.mat-toolbar {
+  min-height: 60px; /* Increase the height of the toolbar */
+  font-size: 16px; /* Increase font size */
+}
+
+.mat-toolbar span {
+  color: white; /* Ensure toolbar text color is white */
+}
+
+.mat-button {
+  color: white; /* Ensure button text color is white */
+}
+
+.spacer {
+  flex-grow: 1; /* Spacer takes up remaining space to push links to the right */
+}
+
+a.active {
+  text-decoration: underline; /* Optional: style for active link */
+}
+

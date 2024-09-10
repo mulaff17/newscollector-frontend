@@ -1,37 +1,37 @@
-<h1>News</h1>
+<h1 class="center-title">News</h1>
 
+<div class="form-container">
+  <form [formGroup]="filterForm" (submit)="submit()">
+    <div class="form-fields">
+      <mat-form-field class="form-field">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom">
+          <input matInput matEndDate placeholder="End date" [formControl]="dateTo">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
 
-<form [formGroup]="filterForm" (submit)="submit()">
-<mat-form-field>
-  <mat-label>Enter a date range</mat-label>
-  <mat-date-range-input [rangePicker]="picker">
-    <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom">
-    <input matInput matEndDate placeholder="End date" [formControl]="dateTo">
-  </mat-date-range-input>
-  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker #picker></mat-date-range-picker>
-</mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>News Sites</mat-label>
+        <mat-select [formControl]="selectedNewsSites" multiple (selectionChange)="onSelectionChange($event)">
+          <mat-option *ngFor="let newsSite of formNewsSites" [value]="newsSite.id">
+            {{newsSite.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-
-<mat-form-field>
-  <mat-label>News Sites</mat-label>
-  <mat-select [formControl]="selectedNewsSites" multiple (selectionChange)="onSelectionChange($event)">
-    <mat-option *ngFor="let newsSite of formNewsSites" [value]="newsSite.id">
-      {{newsSite.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-<button mat-raised-button color="primary" type="submit">Filtern</button>
-
-</form>
-
+    <div class="button-container">
+      <button mat-flat-button color="primary" type="submit">Filter</button>
+    </div>
+  </form>
+</div>
 
 <div class="container">
     <div *ngIf="rssItems.length > 0; else noData" class="rss-grid-container">
-      <h1>News</h1>
       <div class="rss-grid">
         <div class="rss-item" *ngFor="let item of rssItems">
           <a [href]="item.link" target="_blank" class="rss-item-link">

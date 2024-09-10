@@ -6,6 +6,7 @@
   padding: 0 32px;
   gap: 32px;
   margin: 16px auto;
+  margin-left: 10%; margin-right: 10%;
 }
 
 /* Media Query for Tablet Screens and Below */

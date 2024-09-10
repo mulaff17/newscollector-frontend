@@ -6,6 +6,7 @@
   padding: 0 32px;
   gap: 32px;
   margin: 16px auto;
+  margin-left: 10%; margin-right: 10%;
 }
 
 /* Media Query for Tablet Screens and Below */
@@ -223,4 +224,38 @@ h3 {
   font-size: 0.8rem;
   color: #aaa;
   margin: 0;
+}
+
+.center-title {
+  text-align: center;
+  margin-bottom: 20px; /* Space between title and form */
+}
+
+/* Flexbox for the form fields */
+.form-fields {
+  display: flex;
+  justify-content: space-between; /* Ensures space between form fields */
+  gap: 16px; /* Adds space between form fields */
+  flex-wrap: wrap; /* Ensures the fields wrap on smaller screens */
+  margin: 0 12%; /* 12% margin on both sides */
+  margin-bottom: 16px; /* Space between form fields and button */
+}
+
+/* Ensure mat-form-fields are equal width and adjust on smaller screens */
+.form-field {
+  flex: 1;
+  min-width: 300px; /* Ensures the fields have a minimum width */
+}
+
+/* Button container to keep button below form fields */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 12%; /* 12% margin on both sides */
+}
+
+/* Button styling */
+button {
+  margin-left: 8px; /* Adds space between the buttons */
+  align-self: center;
 }

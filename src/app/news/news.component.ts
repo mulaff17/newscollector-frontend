@@ -11,6 +11,8 @@ import {MatInputModule} from '@angular/material/input';
 import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -18,7 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
+  imports: [MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './news.component.html',
   providers: [DatePipe, provideNativeDateAdapter()],
   styleUrl: './news.component.css'
