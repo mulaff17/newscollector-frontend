@@ -15,7 +15,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: background 0.3s ease;
-    height: 90px; /* Set a fixed height for the header */
 }
 
 .header-inner {
@@ -58,8 +57,8 @@
     color: #333;
     font-size: 1rem;
     font-weight: 500;
-    padding: 10px 15px;
-    display: block;
+    padding: 10px 15px; /* Ensure there's padding for better click area */
+    display: block; /* Make sure the link takes up the full area */
     transition: color 0.3s ease;
 }
 
@@ -157,10 +156,6 @@
     }
 }
 
-/* Main Content Styling */
 main {
-    padding-top: 90px; /* Add padding to offset the fixed header height */
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 70px 20px 20px; /* Add padding for the fixed header */
 }
