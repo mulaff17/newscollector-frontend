@@ -35,15 +35,15 @@ export class NewsComponent implements OnInit {
   readonly dateTo = new FormControl(new Date());
   previousValue: number[] = [];
   readonly formNewsSites: NewsSite[] = [
-    { id: 1, name:"Select All"},
-    { id: 2, name:"Wired"},
-    { id: 3, name:"The Hacker News"},
-    { id: 4, name:"BleepingComputer"},
-    { id: 5, name:"The Verge"},
-    { id: 6, name:"Inside IT"},
-    { id: 7, name:"CSO Deutschland"},
-    { id: 8, name:"KrebsonSecurity"},
-    { id: 9, name:"DARK Reading"}
+    { id: 0, name:"Select All"},
+    { id: 1, name:"Wired"},
+    { id: 2, name:"The Hacker News"},
+    { id: 3, name:"BleepingComputer"},
+    { id: 4, name:"The Verge"},
+    { id: 5, name:"Inside IT"},
+    { id: 6, name:"CSO Deutschland"},
+    { id: 7, name:"KrebsonSecurity"},
+    { id: 8, name:"DARK Reading"}
   ];
 
   selectedNewsSites = new FormControl<number[]>([]);
@@ -82,7 +82,7 @@ export class NewsComponent implements OnInit {
 
   }
   onSelectionChange(event:any){
-    if(event.value.includes(1)){
+    if(event.value.includes(0)){
       const allSiteIds = this.formNewsSites.map(site => site.id);
       this.selectedNewsSites.setValue(allSiteIds, { emitEvent: false });
       

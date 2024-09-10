@@ -11,11 +11,13 @@ import {MatInputModule} from '@angular/material/input';
 import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-fraud',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
+  imports: [MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './fraud.component.html',
   providers: [DatePipe, provideNativeDateAdapter()],
   styleUrl: './fraud.component.css'
@@ -30,10 +32,10 @@ export class FraudComponent {
   readonly dateTo = new FormControl(new Date());
   previousValue: number[] = [];
   readonly formfraudSites: NewsSite[] = [
-    { id: 1, name:"Select All"},
-    { id: 10, name:"Cybercrime Police"},
-    { id: 11, name:"Watchlist Internet"},
-    { id: 12, name:"Card Security"},
+    { id: 0, name:"Select All"},
+    { id: 9, name:"Cybercrime Police"},
+    { id: 10, name:"Watchlist Internet"},
+    { id: 11, name:"Card Security"},
   ];
 
   selectedFraudSites = new FormControl<number[]>([]);
@@ -72,7 +74,7 @@ export class FraudComponent {
 
   }
   onSelectionChange(event:any){
-    if(event.value.includes(1)){
+    if(event.value.includes(0)){
       const allSiteIds = this.formfraudSites.map(site => site.id);
       this.selectedFraudSites.setValue(allSiteIds, { emitEvent: false });
       
