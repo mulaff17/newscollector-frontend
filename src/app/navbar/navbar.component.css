@@ -1,0 +1,28 @@
+.toolbar {
+    background-color: #333; /* Dark background color */
+    padding: 0 20px; /* Adds padding to the left and right */
+    display: flex;
+    align-items: center;
+  }
+  
+  .mat-toolbar {
+    min-height: 60px; /* Increase the height of the toolbar */
+    font-size: 16px; /* Increase font size */
+  }
+  
+  .mat-toolbar span {
+    color: white; /* Ensure toolbar text color is white */
+  }
+  
+  .mat-button {
+    color: white; /* Ensure button text color is white */
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  a.active {
+    text-decoration: underline; /* Optional: style for active link */
+  }
+  
