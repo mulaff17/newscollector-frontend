@@ -1,6 +1,10 @@
+<div class="title-header">
+
+<h1>Aktuelle Cybersecurity News</h1>
+</div>
+
 <div class="container">
   <div *ngIf="rssItems.length > 0; else noData" class="rss-grid-container">
-    <h1>News</h1>
     <div class="rss-grid">
       <div class="rss-item" *ngFor="let item of rssItems | slice:0:15">
         <a [href]="item.link" target="_blank" class="rss-item-link">
@@ -17,7 +21,6 @@
   </div>
 
   <div *ngIf="rssFraudItems.length > 0; else noData" class="rss-fraud-container">
-    <h1>Fraud News</h1>
     <ul class="rss-fraud-list">
       <li class="rss-fraud-item" *ngFor="let item of rssFraudItems | slice:0:10">
         <a [href]="item.link" target="_blank" class="rss-fraud-link">

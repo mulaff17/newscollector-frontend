@@ -2,29 +2,56 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
-  
 }
 
 /* Media Query for Tablet Screens and Below */
 @media (max-width: 1024px) {
-
+  .toolbar-content {
+    margin-left: 8%;
+    margin-right: 8%;
+  }
 }
 
 /* Media Query for Mobile Screens */
 @media (max-width: 768px) {
+  .toolbar-content {
+    margin-left: 4%;
+    margin-right: 4%;
+  }
 
+  .mat-toolbar {
+    min-height: 70px; /* Increase toolbar height for smaller screens */
+  }
+
+  .mat-button {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
 }
 
 /* Media Query for Small Mobile Screens */
 @media (max-width: 480px) {
+  .toolbar-content {
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: flex-start;
+  }
 
+  .spacer {
+    display: none; /* Hide spacer on very small screens */
+  }
+
+  .mat-toolbar {
+    min-height: 80px; /* Increase toolbar height further if needed */
+  }
+
+  .mat-button {
+    font-size: 12px; /* Adjust font size for very small screens */
+  }
 }
 
 .toolbar {
-  background-color: #333;
-  
+  background-color: black; /* Change background color to black */
   width: 100%; /* Full width background */
+
 }
 
 .toolbar-content {
@@ -36,15 +63,13 @@
   width: 100%;
 }
 
-
 .toolbar-content a {
-  color: white;
+  color: white; /* Ensure link color is white */
 }
 
-
 .mat-toolbar {
-  min-height: 60px; /* Increase the height of the toolbar */
-  font-size: 16px; /* Increase font size */
+  min-height: 80px; /* Increase the height of the toolbar */
+  font-size: 30px; /* Increase font size */
 }
 
 .mat-toolbar span {
@@ -63,3 +88,7 @@ a.active {
   text-decoration: underline; /* Optional: style for active link */
 }
 
+
+a {
+font-size: 20px;
+}
