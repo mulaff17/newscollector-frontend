@@ -1,10 +1,28 @@
+/* Title Header Styling */
 .title-header {
-  width: 100%; /* Full width */
-  margin: 0; /* Remove any default margin */
-  padding: 0; /* Remove any default padding */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  background-color:#007bff;
+  background-color: black; /* Change background color to black */
+  color: white; /* Set font color to white */
+  padding-left: 12%; 
+  padding-right: 12%;
+  padding-top: 50px; /* Add padding to the top */
+  padding-bottom: 50px; /* Add padding to the bottom */
+  text-align: center; /* Center text horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  height: auto; /* Ensure the height adjusts based on the content */
 }
+
+/* Heading styling in title header */
+.title-header h1 {
+  font-weight: bold; 
+}
+
+.title-header h3 {
+  margin-top: 10px; /* Add some space between H1 and H3 */
+  font-weight: 200;
+}
+
 /* General Container for the page */
 .container {
   display: flex;
@@ -12,10 +30,19 @@
   justify-content: space-between;
   padding: 0 32px;
   gap: 32px;
-  margin: 16px auto;
-  margin-left: 10%; margin-right: 10%;
+  margin: 30px auto 16px; /* Increased top margin to add more space above */
+  margin-left: 10%; 
+  margin-right: 10%;
 }
 
+
+
+/* Section titles styling */
+.container h2 {
+  font-size: 1.2rem; /* Adjusted size to be slightly larger */
+  font-weight: bold;
+  margin-bottom: 16px; /* Add space below the section titles */
+}
 /* Media Query for Tablet Screens and Below */
 @media (max-width: 1024px) {
   .container {
@@ -159,6 +186,13 @@ h3 {
   font-weight: bold;
 }
 
+/* Section titles styling */
+.container h2 {
+  font-size: 2rem; /* Adjusted size to be slightly larger */
+  font-weight: bold;
+  margin-bottom: 16px; /* Add space below the section titles */
+}
+
 /* Creator text styling */
 .rss-creator {
   font-size: 0.9rem;
@@ -208,13 +242,13 @@ h3 {
 }
 
 .rss-fraud-link:hover h3 {
-  color: #007bff; /* Change title color on hover */
+  color: #888; /* Change title color on hover to a different color */
 }
 
-/* Smaller and more condensed styling for fraud item titles */
+/* Larger font size for fraud item titles */
 .rss-fraud-item h3 {
   margin: 0 0 8px;
-  font-size: 1rem;
+  font-size: 1.1rem; /* Increase font size for fraud news titles */
   font-weight: bold;
 }
 
