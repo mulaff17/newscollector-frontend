@@ -12,9 +12,21 @@ import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import { MatDateFormats, MAT_DATE_FORMATS } from '@angular/material/core';
 
 
 
+export const MY_DATE_FORMATS: MatDateFormats = {
+  parse: {
+    dateInput: 'DD.MM.YYYY',
+  },
+  display: {
+    dateInput: 'DD.MM.YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 
 @Component({
@@ -22,9 +34,14 @@ import {MatButtonModule} from '@angular/material/button';
   standalone: true,
   imports: [MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './news.component.html',
-  providers: [DatePipe, provideNativeDateAdapter()],
-  styleUrl: './news.component.css'
+  providers: [
+    DatePipe,
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    provideNativeDateAdapter()  // Use native JavaScript Date object
+  ],
+  styleUrls: ['./news.component.css']
 })
+
 export class NewsComponent implements OnInit {  
   rssItems: (RssData & { newsSiteName?: string })[] = [];
   filterForm!: FormGroup;

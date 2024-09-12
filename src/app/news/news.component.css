@@ -1,3 +1,29 @@
+/* Title Header Styling */
+.title-header {
+  background-color: black; /* Change background color to black */
+  color: white; /* Set font color to white */
+  padding-left: 12%; 
+  padding-right: 12%;
+  padding-top: 50px; /* Add padding to the top */
+  padding-bottom: 50px; /* Add padding to the bottom */
+  text-align: center; /* Center text horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  height: auto; /* Ensure the height adjusts based on the content */
+}
+
+/* Heading styling in title header */
+.title-header h1 {
+  font-weight: bold; 
+}
+
+.title-header h3 {
+  margin-top: 10px; /* Add some space between H1 and H3 */
+  font-weight: 200;
+}
+
+
 /* General Container for the page */
 .container {
   display: flex;

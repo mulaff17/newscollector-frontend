@@ -1,21 +1,26 @@
-<h1 class="center-title">News</h1>
+<div class="title-header">
+
+  <h1>Suche nach Cybersecurity News</h1>
+  <h3>Filter Cybersecurity News nach Zeitraum und Quelle</h3>
+
+  
 
 <div class="form-container">
   <form [formGroup]="filterForm" (submit)="submit()">
     <div class="form-fields">
-      <mat-form-field class="form-field">
-        <mat-label>Enter a date range</mat-label>
+      <mat-form-field appearance="fill">
+        <mat-label>Zeitraum eingeben</mat-label>
         <mat-date-range-input [rangePicker]="picker">
           <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom">
           <input matInput matEndDate placeholder="End date" [formControl]="dateTo">
         </mat-date-range-input>
-        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-date-range-picker #picker></mat-date-range-picker>        
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
 
       <mat-form-field class="form-field">
-        <mat-label>News Sites</mat-label>
+        <mat-label>Wähle News Seite</mat-label>
         <mat-select [formControl]="selectedNewsSites" multiple (selectionChange)="onSelectionChange($event)">
           <mat-option *ngFor="let newsSite of formNewsSites" [value]="newsSite.id">
             {{newsSite.name}}
@@ -28,6 +33,7 @@
       <button mat-flat-button color="primary" type="submit">Filter</button>
     </div>
   </form>
+</div>
 </div>
 
 <div class="container">
@@ -48,7 +54,7 @@
   
 
   </div>
-  
+
   <ng-template #noData>
     <p>No RSS items available.</p>
   </ng-template>
