@@ -1,61 +1,76 @@
 <div class="title-header">
-
   <h1>Suche nach Cybersecurity News</h1>
   <h3>Filter Cybersecurity News nach Zeitraum und Quelle</h3>
 
-  
+  <div class="form-container">
+    <form [formGroup]="filterForm" (submit)="submit()">
+      <div class="form-fields">
+        <mat-form-field class="form-field">
+          <mat-label>Zeitraum eingeben</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom">
+            <input matInput matEndDate placeholder="End date" [formControl]="dateTo">
+          </mat-date-range-input>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        </mat-form-field>
 
-<div class="form-container">
-  <form [formGroup]="filterForm" (submit)="submit()">
-    <div class="form-fields">
-      <mat-form-field appearance="fill">
-        <mat-label>Zeitraum eingeben</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom">
-          <input matInput matEndDate placeholder="End date" [formControl]="dateTo">
-        </mat-date-range-input>
-        <mat-date-range-picker #picker></mat-date-range-picker>        
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Wähle News Seite</mat-label>
+          <mat-select [formControl]="selectedNewsSites" multiple (selectionChange)="onSelectionChange($event)">
+            <mat-option *ngFor="let newsSite of formNewsSites" [value]="newsSite.id">
+              {{newsSite.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field class="form-field">
-        <mat-label>Wähle News Seite</mat-label>
-        <mat-select [formControl]="selectedNewsSites" multiple (selectionChange)="onSelectionChange($event)">
-          <mat-option *ngFor="let newsSite of formNewsSites" [value]="newsSite.id">
-            {{newsSite.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="button-container">
-      <button mat-flat-button color="primary" type="submit">Filter</button>
-    </div>
-  </form>
-</div>
+      <div class="button-container">
+        <button mat-flat-button color="primary" type="submit">Filter</button>
+      </div>
+    </form>
+  </div>
 </div>
 
+<!-- Container for handling different states -->
 <div class="container">
-    <div *ngIf="rssItems.length > 0; else noData" class="rss-grid-container">
-      <div class="rss-grid">
-        <div class="rss-item" *ngFor="let item of rssItems">
-          <a [href]="item.link" target="_blank" class="rss-item-link">
-            <div class="image-container">
-              <img [src]="getImageUrl(item.id)" alt="{{ item.title }}" class="rss-image"/>
-            </div>
-            <h3>{{ item.title }}</h3>
-            <p class="rss-news-site">{{ item.newsSiteName }}</p>
-            <p class="rss-date">{{ item.pub_date | date:'d MMMM yyyy' }}</p>
-          </a>
-        </div>
+
+
+
+  <!-- State: Data is loaded and displayed -->
+  <div *ngIf="rssItems.length > 0 && !isLoading" class="rss-grid-container">
+    <div class="rss-grid">
+      <div class="rss-item" *ngFor="let item of rssItems">
+        <a [href]="item.link" target="_blank" class="rss-item-link">
+          <div class="image-container">
+            <img [src]="getImageUrl(item.id)" alt="{{ item.title }}" class="rss-image"/>
+          </div>
+          <h3>{{ item.title }}</h3>
+          <p class="rss-news-site">{{ item.newsSiteName }}</p>
+          <p class="rss-date">{{ item.pub_date | date:'d MMMM yyyy' }}</p>
+        </a>
       </div>
     </div>
-  
-
   </div>
 
-  <ng-template #noData>
-    <p>No RSS items available.</p>
+
+</div>
+
+<div class="center-content">
+  <!-- State: Data is loading -->
+  <div *ngIf="isLoading" class="centered-content">
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+  <!-- State: Page freshly loaded (no interaction yet) -->
+  <div *ngIf="isPageLoaded && !isLoading" class="centered-content">
+    <p>Filter anwenden um Daten anzuzeigen.</p>
+  </div>
+
+
+  <!-- State: No data available -->
+  <ng-template #noData class="centered-content">
+    <p>Keine Daten verfügbar.</p>
   </ng-template>
-  
+
+</div>

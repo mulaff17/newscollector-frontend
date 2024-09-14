@@ -12,31 +12,20 @@ import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
-import { MatDateFormats, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';  
 
 
 
-export const MY_DATE_FORMATS: MatDateFormats = {
-  parse: {
-    dateInput: 'DD.MM.YYYY',
-  },
-  display: {
-    dateInput: 'DD.MM.YYYY',
-    monthYearLabel: 'MMMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
+
 
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
+  imports: [MatProgressSpinnerModule, MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './news.component.html',
   providers: [
     DatePipe,
-    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
     provideNativeDateAdapter()  // Use native JavaScript Date object
   ],
   styleUrls: ['./news.component.css']
@@ -65,6 +54,9 @@ export class NewsComponent implements OnInit {
 
   selectedNewsSites = new FormControl<number[]>([]);
 
+  isPageLoaded: boolean = true;  
+  isLoading: boolean = false;    
+
   constructor(private rssItemsService: RssItemsService, private formBuilder: FormBuilder, private datePipe: DatePipe){
 
 
@@ -84,16 +76,21 @@ export class NewsComponent implements OnInit {
   submit() {
     const newsSites: number[] = this.selectedNewsSites.value || [];
 
+    this.isPageLoaded = false;    
+    this.isLoading = true;        
+
     this.formattedDateFrom = this.datePipe.transform(this.dateFrom.value, 'yyyy-MM-dd') || '';
     this.formattedDateTo = this.datePipe.transform(this.dateTo.value, 'yyyy-MM-dd') || '';
     this.rssItemsService.getRssItemsDate(this.formattedDateFrom, this.formattedDateTo, newsSites).subscribe({
       next: (rssItems: RssData[]) => {
         this.rssItems = rssItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 
+        this.isLoading = false;
       },
       error: (error:any) => {
         this.errorMessage = error;
         console.error('Error loading RSS items:', error);
+        this.isLoading = false;
       },
     });
 
