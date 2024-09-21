@@ -12,12 +12,14 @@ import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';  
+
 
 
 @Component({
   selector: 'app-fraud',
   standalone: true,
-  imports: [MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
+  imports: [MatProgressSpinnerModule, MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, MatInputModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './fraud.component.html',
   providers: [DatePipe, provideNativeDateAdapter()],
   styleUrl: './fraud.component.css'
@@ -39,7 +41,8 @@ export class FraudComponent {
   ];
 
   selectedFraudSites = new FormControl<number[]>([]);
-
+  isPageLoaded: boolean = true;  
+  isLoading: boolean = false; 
   constructor(private rssItemsService: RssItemsService, private formBuilder: FormBuilder, private datePipe: DatePipe){
 
 
@@ -59,16 +62,21 @@ export class FraudComponent {
   submit() {
     const fraudSites: number[] = this.selectedFraudSites.value || [];
 
+    this.isPageLoaded = false;    
+    this.isLoading = true;    
+
     this.formattedDateFrom = this.datePipe.transform(this.dateFrom.value, 'yyyy-MM-dd') || '';
     this.formattedDateTo = this.datePipe.transform(this.dateTo.value, 'yyyy-MM-dd') || '';
     this.rssItemsService.getFraudRssItemsDate(this.formattedDateFrom, this.formattedDateTo, fraudSites).subscribe({
       next: (rssItems: RssData[]) => {
         this.rssItems = rssItems.sort((a, b) => new Date(b.pub_date).getTime() - new Date(a.pub_date).getTime());
         this.loadNewsSiteNames(); 
+        this.isLoading = false;
       },
       error: (error:any) => {
         this.errorMessage = error;
         console.error('Error loading RSS items:', error);
+        this.isLoading = false;
       },
     });
 
