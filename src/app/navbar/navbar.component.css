@@ -31,6 +31,7 @@
 /* Media Query for Small Mobile Screens */
 @media (max-width: 480px) {
   .toolbar-content {
+    margin-top: 7vh;
     flex-direction: column; /* Stack items vertically on small screens */
     align-items: flex-start;
   }
@@ -46,12 +47,15 @@
   .mat-button {
     font-size: 12px; /* Adjust font size for very small screens */
   }
+  .links{
+    flex-direction: row;
+    margin-top: 2vh;
+  }
 }
 
 .toolbar {
   background-color: black; /* Change background color to black */
   width: 100%; /* Full width background */
-
 }
 
 .toolbar-content {
@@ -61,6 +65,7 @@
   margin-left: 12%;
   margin-right: 12%;
   width: 100%;
+  border-bottom: 2px solid white; /* Add a white line below the navbar */
 }
 
 .toolbar-content a {
