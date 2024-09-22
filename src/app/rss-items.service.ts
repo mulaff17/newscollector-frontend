@@ -8,7 +8,7 @@ import { RssData } from './rss-data';
 })
 export class RssItemsService {
 
-  private apiUrl = 'http://109.205.181.104:3000';
+  private apiUrl = 'https://api.cybernews-collector.ch';
 
   constructor(private http: HttpClient) { }
   getRssItemsDate(dateFrom: string, dateTo: string, newsSites: number[]): Observable<RssData[]> {
