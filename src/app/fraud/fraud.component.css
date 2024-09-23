@@ -37,6 +37,11 @@
   text-align:center;
 }
 
+h3 {
+  line-height: 1.2;
+}
+
+
 /* Media Query for Tablet Screens and Below */
 @media (max-width: 1024px) {
   .container {
@@ -84,7 +89,7 @@
   }
 
   .rss-grid {
-    grid-template-columns: repeat(2, 1fr) !important; /* 2 columns for small mobile screens */
+    grid-template-columns: repeat(1, 1fr) !important; /* 2 columns for small mobile screens */
   }
 
   .rss-fraud-container {

@@ -8,8 +8,8 @@
         <mat-form-field class="form-field">
           <mat-label>Zeitraum eingeben</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom">
-            <input matInput matEndDate placeholder="End date" [formControl]="dateTo">
+            <input matInput matStartDate placeholder="Start date" [formControl]="dateFrom" required>
+            <input matInput matEndDate placeholder="End date" [formControl]="dateTo" required>
           </mat-date-range-input>
           <mat-date-range-picker #picker></mat-date-range-picker>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -17,7 +17,7 @@
 
         <mat-form-field class="form-field">
           <mat-label>Wähle News Seite</mat-label>
-          <mat-select [formControl]="selectedNewsSites" multiple (selectionChange)="onSelectionChange($event)">
+          <mat-select [formControl]="selectedNewsSites" multiple (selectionChange)="onSelectionChange($event)" required>
             <mat-option *ngFor="let newsSite of formNewsSites" [value]="newsSite.id">
               {{newsSite.name}}
             </mat-option>

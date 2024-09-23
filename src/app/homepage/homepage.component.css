@@ -36,6 +36,9 @@
   margin-right: 10%;
 }
 
+h3 {
+  line-height: 1.2;
+}
 
 
 /* Section titles styling */
@@ -116,8 +119,12 @@
 
   h3 {
     font-size: 0.9rem; /* Further reduce font size */
+    text-align: center;
   }
 
+  p{
+    text-align: center;
+  }
   .rss-creator, .rss-news-site, .rss-date {
     font-size: 0.75rem; /* Smaller text for creator, site, and date */
   }
