@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/cybernews-frontend/server",
+    "public": "dist/cybernews-frontend/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -9,7 +9,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.server.html"
+        "destination": "/index.html"
       }
     ],
     "headers": [
@@ -19,7 +19,11 @@
           {
             "key": "Cache-Control",
             "value": "public,max-age=31536000,immutable" 
-          }
+          },
+          {
+          "key": "type",
+          "value": "text/javascript"
+        }
         ]
       },
       {
